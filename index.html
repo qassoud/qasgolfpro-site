@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QasGolfPro — Votre golf, simplement</title>
+<meta name="description" content="QasGolfPro : application de golf pour scores, GPS satellite, parcours, statistiques, formules de jeu, sauvegarde et partage.">
+<style>
+:root{
+  --green:#1f7a4d;
+  --green-dark:#0d4d30;
+  --lime:#b9f1c8;
+  --ink:#0d1721;
+  --muted:#65707a;
+  --paper:#f5f8f6;
+  --white:#fff;
+  --line:#dfe8e2;
+  --blue:#1687d9;
+  --blue-light:#e9f6ff;
+  --blue-dark:#176a9d;
+  --shadow:0 18px 60px rgba(13,40,28,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.5;
+}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+.wrap{width:min(1180px,calc(100% - 34px));margin:auto}
+
+/* HEADER */
+.site-header{
+  position:sticky; top:0; z-index:80;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(16,70,44,.08);
+}
+.nav{
+  height:72px; display:flex; align-items:center; justify-content:space-between; gap:18px;
+}
+.brand{font-size:1.35rem;font-weight:950;letter-spacing:-.045em}
+.brand span{color:var(--green)}
+.desktop-nav{display:flex;align-items:center;gap:22px;font-weight:750}
+.desktop-nav a{color:#26323a}
+.store-mini{
+  background:var(--green);color:white;padding:12px 17px;border-radius:999px;font-weight:850;
+}
+.menu-btn{
+  display:none;width:46px;height:46px;border-radius:14px;border:1px solid var(--line);
+  background:white;align-items:center;justify-content:center;font-size:1.55rem;cursor:pointer;
+}
+.mobile-drawer{
+  display:none;position:fixed;inset:72px 0 auto 0;z-index:75;background:white;
+  border-bottom:1px solid var(--line);box-shadow:var(--shadow);padding:14px 18px 20px;
+}
+.mobile-drawer.open{display:block}
+.mobile-drawer a{display:block;padding:15px 10px;border-bottom:1px solid #edf2ef;font-weight:800}
+.mobile-drawer .store-mini{display:inline-flex;margin-top:14px;border-bottom:none}
+
+/* HERO */
+.hero{
+  min-height:calc(100svh - 72px);
+  display:flex;align-items:center;
+  background:
+    radial-gradient(circle at 78% 20%, rgba(44,168,97,.18), transparent 26%),
+    linear-gradient(180deg,#eef7f1 0%,#f8fbf9 100%);
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.03fr .97fr;gap:46px;align-items:center;padding:56px 0 42px;
+}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
+  background:var(--blue-light);color:var(--blue-dark);font-size:.88rem;font-weight:900;
+}
+h1{
+  margin:18px 0 18px;
+  font-size:clamp(3.1rem,7vw,6.5rem);
+  line-height:.92;letter-spacing:-.07em;
+}
+.hero p{font-size:1.18rem;color:var(--muted);max-width:650px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:50px;padding:0 20px;border-radius:14px;font-weight:900;
+  border:1px solid transparent;
+}
+.btn.primary{background:var(--green);color:white;box-shadow:0 12px 28px rgba(31,122,77,.22)}
+.btn.secondary{background:white;color:var(--green);border-color:var(--line)}
+.appstore{
+  background:#0a0a0a;color:white;border-radius:13px;padding:10px 16px;display:inline-flex;
+  align-items:center;gap:10px;font-weight:850;min-height:54px;
+}
+.appstore .apple{font-size:1.7rem;line-height:1}
+.hero-visual{position:relative;min-height:610px}
+.phone{
+  position:absolute;width:46%;border-radius:32px;box-shadow:0 30px 90px rgba(9,45,28,.25);
+  border:1px solid rgba(255,255,255,.8)
+}
+.phone.a{left:4%;bottom:-10px;transform:rotate(-4deg)}
+.phone.b{right:2%;top:0;transform:rotate(4deg)}
+
+/* QUICK VALUE STRIP */
+.value-strip{background:white;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.values{display:grid;grid-template-columns:repeat(4,1fr)}
+.value{padding:23px 18px;text-align:center;border-right:1px solid var(--line)}
+.value:last-child{border-right:none}
+.value b{display:block;font-size:1.08rem}
+.value span{color:var(--muted);font-size:.92rem}
+
+/* SHORT SECTIONS */
+.section{padding:72px 0}
+.section.white{background:white}
+.eyebrow{
+  text-transform:uppercase;letter-spacing:.13em;font-size:.72rem;font-weight:950;color:var(--blue)
+}
+
+.eyebrow.brand-case{
+  text-transform:none;letter-spacing:0;color:var(--blue);font-size:.88rem
+}
+h2{
+  margin:7px 0 12px;font-size:clamp(2.1rem,4.2vw,4.3rem);
+  line-height:1;letter-spacing:-.055em
+}
+.lead{color:var(--muted);font-size:1.12rem;max-width:760px;margin:0 0 28px}
+
+/* HORIZONTAL FEATURE CARDS */
+.scroller{
+  display:grid;grid-auto-flow:column;grid-auto-columns:minmax(290px,34%);
+  gap:18px;overflow-x:auto;padding:4px 4px 18px;scroll-snap-type:x mandatory;
+  scrollbar-width:thin;
+}
+.scroller::-webkit-scrollbar{height:8px}
+.scroller::-webkit-scrollbar-thumb{background:#bfd0c4;border-radius:999px}
+.card{
+  scroll-snap-align:start;background:white;border:1px solid var(--line);border-radius:24px;
+  overflow:hidden;box-shadow:0 12px 40px rgba(18,62,39,.07)
+}
+.card-copy{padding:22px 22px 12px}
+.card h3{margin:2px 0 6px;font-size:1.35rem}
+.card p{margin:0;color:var(--muted)}
+.card img{width:100%;height:auto;object-fit:contain;object-position:top;background:#f7fafc}
+
+/* GPS CTA */
+.gps-panel{
+  background:linear-gradient(135deg,#0c3926,#1f7a4d);
+  color:white;border-radius:34px;padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;
+}
+.gps-panel p{color:#d9eee2}
+.gps-shots{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gps-shots img{width:100%;height:430px;object-fit:cover;object-position:top;border-radius:24px;box-shadow:0 20px 55px rgba(0,0,0,.26)}
+.link-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.link-card{
+  display:flex;justify-content:space-between;align-items:center;padding:16px;border-radius:18px;
+  background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);font-weight:850
+}
+
+/* VIDEO DEMO */
+.video-demo{
+  display:grid;grid-template-columns:1fr .78fr;gap:42px;align-items:center;
+}
+.video-copy .lead{margin-bottom:20px}
+.video-frame{
+  width:min(100%,430px);margin-inline:auto;padding:10px;border-radius:34px;
+  background:#0b1410;box-shadow:0 26px 70px rgba(13,40,28,.18);
+}
+.video-frame video{
+  display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:26px;background:#000;
+}
+.video-note{margin-top:12px;color:var(--muted);font-size:.9rem;text-align:center}
+.video-jump{white-space:nowrap}
+
+/* PREMIUM */
+.premium{
+  display:grid;grid-template-columns:.95fr 1.05fr;gap:36px;align-items:center
+}
+.premium img{
+  width:100%;max-height:620px;object-fit:cover;object-position:top;border-radius:26px;border:1px solid var(--line)
+}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.chip{padding:9px 12px;border-radius:999px;background:var(--blue-light);color:var(--blue-dark);font-weight:800;font-size:.92rem}
+
+/* BROCHURE SHORT */
+.brochure{
+  display:grid;grid-template-columns:1fr .85fr;gap:30px;align-items:center;
+  background:linear-gradient(135deg,#eef8ff,#fff);border:1px solid #cfe4f2;border-radius:30px;padding:30px
+}
+.brochure iframe{width:100%;height:420px;border:none;border-radius:18px;background:white}
+
+/* FOOTER */
+footer{padding:34px 0 44px;color:#667;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* GPS PAGES */
+.gps-hero{
+  min-height:calc(100svh - 72px);display:grid;grid-template-columns:.92fr 1.08fr;gap:38px;align-items:center;padding:44px 0;
+}
+.gps-hero img{width:100%;max-height:calc(100svh - 110px);object-fit:contain;border-radius:28px;box-shadow:var(--shadow)}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+.metric{background:white;border:1px solid var(--line);border-radius:18px;padding:16px}
+.metric b{display:block;margin-bottom:5px}
+
+/* MOBILE */
+@media(max-width:900px){
+  .desktop-nav{display:none}
+  .menu-btn{display:flex}
+  .hero{min-height:auto}
+  .hero-grid{grid-template-columns:1fr;padding:42px 0 28px}
+  .hero-visual{min-height:460px}
+  .values{grid-template-columns:1fr 1fr}
+  .value:nth-child(2){border-right:none}
+  .value:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .scroller{grid-auto-columns:minmax(260px,78%)}
+  .gps-panel,.premium,.brochure,.gps-hero,.video-demo{grid-template-columns:1fr}
+  .gps-shots img{height:370px}
+  .gps-hero{padding:28px 0}
+  .gps-hero img{max-height:none}
+}
+@media(max-width:620px){
+  .wrap{width:min(100% - 24px,1180px)}
+  .nav{height:64px}
+  .mobile-drawer{inset:64px 0 auto 0}
+  h1{font-size:clamp(3rem,16vw,5rem)}
+  .hero-grid{gap:22px}
+  .hero-visual{min-height:390px}
+  .phone{width:48%;border-radius:22px}
+  .actions{gap:9px}
+  .btn,.appstore{width:100%}
+  .section{padding:54px 0}
+  .scroller{grid-auto-columns:86%}
+  .card img{height:auto}
+  .gps-panel{padding:22px}
+  .gps-shots{grid-template-columns:1fr 1fr}
+  .gps-shots img{height:300px}
+  .link-cards{grid-template-columns:1fr}
+  .brochure iframe{height:360px}
+}
+
+.gps-feature-card{min-width:0}
+.gps-duo-crop{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px 12px}
+.gps-crop{height:330px;overflow:hidden;border-radius:18px;background:#111}
+.gps-crop img{width:100%;height:auto;min-height:430px;object-fit:cover;object-position:center top;transform:translateY(-115px)}
+.gps-small-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.gps-small-links a{font-size:.84rem;font-weight:850;color:var(--blue-dark);background:var(--blue-light);border:1px solid #cfe8f7;padding:8px 10px;border-radius:999px}
+@media(max-width:620px){
+ .gps-crop{height:285px}
+ .gps-crop img{transform:translateY(-100px)}
+}
+
+</style></head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">QasGolf<span>Pro</span></a>
+    <nav class="desktop-nav">
+      <a href="#fonctions">Fonctions</a>
+      <a href="#video">Vidéo</a>
+      <a href="#premium">Premium</a>
+      <a href="#brochure">Brochure</a>
+      <a class="store-mini" href="https://apps.apple.com/app/id6798021332" target="_blank">App Store</a>
+    </nav>
+    <button class="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<div class="mobile-drawer">
+  <a href="#fonctions">Fonctions</a>
+  <a href="#video">Vidéo</a>
+  <a href="#premium">Premium</a>
+  <a href="#brochure">Brochure</a>
+  <a class="store-mini" href="https://apps.apple.com/app/id6798021332" target="_blank">Voir sur l’App Store</a>
+</div>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">⛳ QasGolfPro • Score & GPS</span>
+      <h1>Jouez mieux.<br>Suivez tout.</h1>
+      <p>Scores, parcours, statistiques, formules de jeu et outils utiles sur le parcours, dans une seule application claire et simple à utiliser.</p>
+      <div class="actions">
+        <a class="appstore" href="https://apps.apple.com/app/id6798021332" target="_blank"><span class="apple"></span><span>Disponible sur<br><b>l’App Store</b></span></a>
+        <a class="btn secondary video-jump" href="#video">▶ Voir la vidéo</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img class="phone a" src="assets/home.png" alt="Accueil QasGolfPro">
+      <img class="phone b" src="assets/score_annotated.png" alt="Carte de score QasGolfPro">
+    </div>
+  </div>
+</section>
+
+<div class="value-strip">
+  <div class="wrap values">
+    <div class="value"><b>Score</b><span>trou par trou</span></div>
+    <div class="value"><b>Sur le parcours</b><span>vue satellite & distances</span></div>
+    <div class="value"><b>Statistiques</b><span>pour progresser</span></div>
+    <div class="value"><b>Partage</b><span>sauvegarder & transmettre</span></div>
+  </div>
+</div>
+
+<section class="section" id="video">
+  <div class="wrap video-demo">
+    <div class="video-copy">
+      <span class="eyebrow">Vidéo de démonstration</span>
+      <h2>Découvrez QasGolfPro en action.</h2>
+      <p class="lead">Ajout de joueurs, téléchargement de parcours, création d’une partie, saisie des scores, résumé, GPS, changement de langue, sauvegarde, AirDrop et statistiques globales.</p>
+      <p class="lead" style="font-size:1rem">Lancez la vidéo pour suivre une démonstration complète de l’application sur iPhone.</p>
+    </div>
+    <div>
+      <div class="video-frame">
+        <video controls playsinline preload="metadata" poster="assets/qasgolfpro_demo_poster.jpg" aria-label="Vidéo de démonstration QasGolfPro">
+          <source src="assets/qasgolfpro_demo.mp4" type="video/mp4">
+          Votre navigateur ne peut pas lire cette vidéo.
+        </video>
+      </div>
+      <div class="video-note">Tutoriel QasGolfPro · lecture optimisée sur mobile</div>
+    </div>
+  </div>
+</section>
+
+<section class="section white" id="fonctions">
+  <div class="wrap">
+    <span class="eyebrow">Fonctions</span>
+    <h2>L’essentiel, sans page interminable.</h2>
+    <p class="lead">Découvrez les principales fonctions de QasGolfPro.</p>
+    <div class="scroller">
+      <article class="card"><div class="card-copy"><span class="eyebrow">Joueurs</span><h3>Vos partenaires en un instant</h3><p>Créez, recherchez et gérez les joueurs facilement.</p></div><img src="assets/players.png" alt=""></article>
+      <article class="card"><div class="card-copy"><span class="eyebrow">Parcours</span><h3>Retrouvez votre golf</h3><p>Parcours organisés par pays et informations utiles.</p></div><img src="assets/courses.png" alt=""></article>
+      <article class="card"><div class="card-copy"><span class="eyebrow">Formules</span><h3>Jouez comme vous aimez</h3><p>Stroke Play, Stableford, Match Play, Four Ball, Scramble et plus.</p></div><img src="assets/formats.png" alt=""></article>
+      <article class="card"><div class="card-copy"><span class="eyebrow">Scores</span><h3>Une carte claire</h3><p>Suivez la partie trou par trou sans perdre le rythme.</p></div><img src="assets/score_annotated.png" alt=""></article>
+      <article class="card gps-feature-card">
+        <div class="card-copy">
+          <span class="eyebrow">GPS satellite</span>
+          <h3>Distances et vue du parcours</h3>
+          <p>Visualisez le terrain en satellite, votre position et les repères de distance pendant la partie.</p>
+          <div class="gps-small-links">
+            <a href="gps_vue_1.html">Voir un exemple</a>
+            <a href="gps_vue_2.html">Voir une autre vue</a>
+          </div>
+        </div>
+        <div class="gps-duo-crop">
+          <div class="gps-crop"><img src="assets/gps.png" alt="Exemple GPS satellite QasGolfPro"></div>
+          <div class="gps-crop"><img src="assets/satellite_page.png" alt="Deuxième exemple GPS satellite QasGolfPro"></div>
+        </div>
+      </article>
+
+      <article class="card"><div class="card-copy"><span class="eyebrow">Statistiques</span><h3>Comprenez votre jeu</h3><p>Analysez les scores, la progression et les performances.</p></div><img src="assets/stats.png" alt=""></article>
+      <article class="card"><div class="card-copy"><span class="eyebrow">Partage</span><h3>Gardez vos données</h3><p>Sauvegardez, restaurez et partagez vos parties.</p></div><img src="assets/backup.png" alt=""></article>
+    </div>
+  </div>
+</section>
+
+<section class="section white" id="premium">
+  <div class="wrap premium">
+    <img src="assets/premium.png" alt="QasGolfPro Premium">
+    <div>
+      <span class="eyebrow">Premium</span>
+      <h2>Plus d’analyse. Plus de contrôle.</h2>
+      <p class="lead">Les fonctions avancées sont regroupées dans une seule section courte.</p>
+      <div class="chips">
+        <span class="chip">Statistiques générales</span>
+        <span class="chip">Stats de partie</span>
+        <span class="chip">Graphiques</span>
+        <span class="chip">Historique</span>
+        <span class="chip">Filtres avancés</span>
+        <span class="chip">Téléchargement de parcours</span>
+      </div>
+      <div class="actions"><a class="btn primary" href="https://apps.apple.com/app/id6798021332" target="_blank">Découvrir Premium</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="brochure">
+  <div class="wrap brochure">
+    <div>
+      <span class="eyebrow">Brochure</span>
+      <h2>Préparer. Jouer. Suivre. Partager.</h2>
+      <p class="lead">La brochure complète reste disponible pour ceux qui veulent aller plus loin, sans alourdir la page d’accueil.</p>
+      <div class="actions">
+        <a class="btn primary" href="assets/brochure.pdf" target="_blank">Ouvrir la brochure PDF</a>
+        <a class="btn secondary" href="https://sites.google.com/view/QasGolfPro/assistance" target="_blank">Assistance</a>
+      </div>
+    </div>
+    <iframe src="assets/brochure.pdf#page=1"></iframe>
+  </div>
+</section>
+
+<section class="section white">
+  <div class="wrap" style="text-align:center;max-width:800px">
+    <span class="eyebrow brand-case">QasGolfPro</span>
+    <h2>Votre prochaine partie commence ici.</h2>
+    <p class="lead" style="margin-inline:auto">Téléchargez l’application et gardez l’essentiel du golf à portée de main.</p>
+    <a class="appstore" href="https://apps.apple.com/app/id6798021332" target="_blank"><span class="apple"></span><span>Disponible sur<br><b>l’App Store</b></span></a>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">
+  <div><b>QasGolfPro</b> · Votre golf, simplement.</div>
+  <div><a href="https://sites.google.com/view/QasGolfPro/assistance" target="_blank">Assistance</a> · © 2026 Qassoud</div>
+</footer>
+<script>
+const btn = document.querySelector('.menu-btn');
+const drawer = document.querySelector('.mobile-drawer');
+if(btn && drawer){
+  btn.addEventListener('click', ()=>{
+    const open = drawer.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true':'false');
+    btn.textContent = open ? '✕' : '☰';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
+    drawer.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    btn.textContent='☰';
+  }));
+}
+</script>
+</body></html>

@@ -1,0 +1,269 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QasGolfPro — Exemple GPS satellite</title><style>
+:root{
+  --green:#1f7a4d;
+  --green-dark:#0d4d30;
+  --lime:#b9f1c8;
+  --ink:#0d1721;
+  --muted:#65707a;
+  --paper:#f5f8f6;
+  --white:#fff;
+  --line:#dfe8e2;
+  --blue:#1687d9;
+  --shadow:0 18px 60px rgba(13,40,28,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.5;
+}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+.wrap{width:min(1180px,calc(100% - 34px));margin:auto}
+
+/* HEADER */
+.site-header{
+  position:sticky; top:0; z-index:80;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(16,70,44,.08);
+}
+.nav{
+  height:72px; display:flex; align-items:center; justify-content:space-between; gap:18px;
+}
+.brand{font-size:1.35rem;font-weight:950;letter-spacing:-.045em}
+.brand span{color:var(--green)}
+.desktop-nav{display:flex;align-items:center;gap:22px;font-weight:750}
+.desktop-nav a{color:#26323a}
+.store-mini{
+  background:var(--green);color:white;padding:12px 17px;border-radius:999px;font-weight:850;
+}
+.menu-btn{
+  display:none;width:46px;height:46px;border-radius:14px;border:1px solid var(--line);
+  background:white;align-items:center;justify-content:center;font-size:1.55rem;cursor:pointer;
+}
+.mobile-drawer{
+  display:none;position:fixed;inset:72px 0 auto 0;z-index:75;background:white;
+  border-bottom:1px solid var(--line);box-shadow:var(--shadow);padding:14px 18px 20px;
+}
+.mobile-drawer.open{display:block}
+.mobile-drawer a{display:block;padding:15px 10px;border-bottom:1px solid #edf2ef;font-weight:800}
+.mobile-drawer .store-mini{display:inline-flex;margin-top:14px;border-bottom:none}
+
+/* HERO */
+.hero{
+  min-height:calc(100svh - 72px);
+  display:flex;align-items:center;
+  background:
+    radial-gradient(circle at 78% 20%, rgba(44,168,97,.18), transparent 26%),
+    linear-gradient(180deg,#eef7f1 0%,#f8fbf9 100%);
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.03fr .97fr;gap:46px;align-items:center;padding:56px 0 42px;
+}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
+  background:#e5f4eb;color:var(--green-dark);font-size:.88rem;font-weight:900;
+}
+h1{
+  margin:18px 0 18px;
+  font-size:clamp(3.1rem,7vw,6.5rem);
+  line-height:.92;letter-spacing:-.07em;
+}
+.hero p{font-size:1.18rem;color:var(--muted);max-width:650px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:50px;padding:0 20px;border-radius:14px;font-weight:900;
+  border:1px solid transparent;
+}
+.btn.primary{background:var(--green);color:white;box-shadow:0 12px 28px rgba(31,122,77,.22)}
+.btn.secondary{background:white;color:var(--green);border-color:var(--line)}
+.appstore{
+  background:#0a0a0a;color:white;border-radius:13px;padding:10px 16px;display:inline-flex;
+  align-items:center;gap:10px;font-weight:850;min-height:54px;
+}
+.appstore .apple{font-size:1.7rem;line-height:1}
+.hero-visual{position:relative;min-height:610px}
+.phone{
+  position:absolute;width:46%;border-radius:32px;box-shadow:0 30px 90px rgba(9,45,28,.25);
+  border:1px solid rgba(255,255,255,.8)
+}
+.phone.a{left:4%;bottom:-10px;transform:rotate(-4deg)}
+.phone.b{right:2%;top:0;transform:rotate(4deg)}
+
+/* QUICK VALUE STRIP */
+.value-strip{background:white;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.values{display:grid;grid-template-columns:repeat(4,1fr)}
+.value{padding:23px 18px;text-align:center;border-right:1px solid var(--line)}
+.value:last-child{border-right:none}
+.value b{display:block;font-size:1.08rem}
+.value span{color:var(--muted);font-size:.92rem}
+
+/* SHORT SECTIONS */
+.section{padding:72px 0}
+.section.white{background:white}
+.eyebrow{
+  text-transform:uppercase;letter-spacing:.13em;font-size:.72rem;font-weight:950;color:var(--green)
+}
+h2{
+  margin:7px 0 12px;font-size:clamp(2.1rem,4.2vw,4.3rem);
+  line-height:1;letter-spacing:-.055em
+}
+.lead{color:var(--muted);font-size:1.12rem;max-width:760px;margin:0 0 28px}
+
+/* HORIZONTAL FEATURE CARDS */
+.scroller{
+  display:grid;grid-auto-flow:column;grid-auto-columns:minmax(290px,34%);
+  gap:18px;overflow-x:auto;padding:4px 4px 18px;scroll-snap-type:x mandatory;
+  scrollbar-width:thin;
+}
+.scroller::-webkit-scrollbar{height:8px}
+.scroller::-webkit-scrollbar-thumb{background:#bfd0c4;border-radius:999px}
+.card{
+  scroll-snap-align:start;background:white;border:1px solid var(--line);border-radius:24px;
+  overflow:hidden;box-shadow:0 12px 40px rgba(18,62,39,.07)
+}
+.card-copy{padding:22px 22px 12px}
+.card h3{margin:2px 0 6px;font-size:1.35rem}
+.card p{margin:0;color:var(--muted)}
+.card img{width:100%;height:380px;object-fit:cover;object-position:top}
+
+/* GPS CTA */
+.gps-panel{
+  background:linear-gradient(135deg,#0c3926,#1f7a4d);
+  color:white;border-radius:34px;padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;
+}
+.gps-panel p{color:#d9eee2}
+.gps-shots{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gps-shots img{width:100%;height:430px;object-fit:cover;object-position:top;border-radius:24px;box-shadow:0 20px 55px rgba(0,0,0,.26)}
+.link-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.link-card{
+  display:flex;justify-content:space-between;align-items:center;padding:16px;border-radius:18px;
+  background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);font-weight:850
+}
+
+/* PREMIUM */
+.premium{
+  display:grid;grid-template-columns:.95fr 1.05fr;gap:36px;align-items:center
+}
+.premium img{
+  width:100%;max-height:620px;object-fit:cover;object-position:top;border-radius:26px;border:1px solid var(--line)
+}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.chip{padding:9px 12px;border-radius:999px;background:#eaf5ee;color:var(--green-dark);font-weight:800;font-size:.92rem}
+
+/* BROCHURE SHORT */
+.brochure{
+  display:grid;grid-template-columns:1fr .85fr;gap:30px;align-items:center;
+  background:linear-gradient(135deg,#eef8ff,#fff);border:1px solid #cfe4f2;border-radius:30px;padding:30px
+}
+.brochure iframe{width:100%;height:420px;border:none;border-radius:18px;background:white}
+
+/* FOOTER */
+footer{padding:34px 0 44px;color:#667;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* GPS PAGES */
+.gps-hero{
+  min-height:calc(100svh - 72px);display:grid;grid-template-columns:.92fr 1.08fr;gap:38px;align-items:center;padding:44px 0;
+}
+.gps-hero img{width:100%;max-height:calc(100svh - 110px);object-fit:contain;border-radius:28px;box-shadow:var(--shadow)}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+.metric{background:white;border:1px solid var(--line);border-radius:18px;padding:16px}
+.metric b{display:block;margin-bottom:5px}
+
+/* MOBILE */
+@media(max-width:900px){
+  .desktop-nav{display:none}
+  .menu-btn{display:flex}
+  .hero{min-height:auto}
+  .hero-grid{grid-template-columns:1fr;padding:42px 0 28px}
+  .hero-visual{min-height:460px}
+  .values{grid-template-columns:1fr 1fr}
+  .value:nth-child(2){border-right:none}
+  .value:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .scroller{grid-auto-columns:minmax(260px,78%)}
+  .gps-panel,.premium,.brochure,.gps-hero{grid-template-columns:1fr}
+  .gps-shots img{height:370px}
+  .gps-hero{padding:28px 0}
+  .gps-hero img{max-height:none}
+}
+@media(max-width:620px){
+  .wrap{width:min(100% - 24px,1180px)}
+  .nav{height:64px}
+  .mobile-drawer{inset:64px 0 auto 0}
+  h1{font-size:clamp(3rem,16vw,5rem)}
+  .hero-grid{gap:22px}
+  .hero-visual{min-height:390px}
+  .phone{width:48%;border-radius:22px}
+  .actions{gap:9px}
+  .btn,.appstore{width:100%}
+  .section{padding:54px 0}
+  .scroller{grid-auto-columns:86%}
+  .card img{height:420px}
+  .gps-panel{padding:22px}
+  .gps-shots{grid-template-columns:1fr 1fr}
+  .gps-shots img{height:300px}
+  .link-cards{grid-template-columns:1fr}
+  .brochure iframe{height:360px}
+}
+
+.gps-feature-card{min-width:0}
+.gps-duo-crop{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px 12px}
+.gps-crop{height:330px;overflow:hidden;border-radius:18px;background:#111}
+.gps-crop img{width:100%;height:auto;min-height:430px;object-fit:cover;object-position:center top;transform:translateY(-115px)}
+.gps-small-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.gps-small-links a{font-size:.84rem;font-weight:850;color:var(--green);background:#eef7f1;border:1px solid var(--line);padding:8px 10px;border-radius:999px}
+@media(max-width:620px){
+ .gps-crop{height:285px}
+ .gps-crop img{transform:translateY(-100px)}
+}
+
+
+.full-gps-wrap{width:min(980px,calc(100% - 28px));margin:28px auto 50px}
+.full-gps-card{background:white;border:1px solid var(--line);border-radius:28px;padding:20px;box-shadow:var(--shadow)}
+.full-gps-shot{height:min(78svh,900px);overflow:hidden;border-radius:22px;background:#111}
+.full-gps-shot img{width:100%;height:auto;min-height:100%;object-fit:cover;object-position:center top;transform:translateY(-120px)}
+.gps-note{display:flex;justify-content:space-between;gap:16px;align-items:center;margin:18px 0 0;flex-wrap:wrap}
+@media(max-width:620px){
+ .full-gps-shot{height:72svh}
+ .full-gps-shot img{transform:translateY(-95px)}
+}
+</style></head><body>
+<header class="site-header"><div class="wrap nav">
+<a class="brand" href="index.html">QasGolf<span>Pro</span></a>
+<nav class="desktop-nav"><a href="index.html#fonctions">Fonctions</a><a href="gps_vue_1.html">Autre vue GPS</a><a class="store-mini" href="https://apps.apple.com/app/id6798021332" target="_blank">App Store</a></nav>
+<button class="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+</div></header>
+<div class="mobile-drawer"><a href="index.html#fonctions">Fonctions</a><a href="gps_vue_1.html">Autre vue GPS</a><a class="store-mini" href="https://apps.apple.com/app/id6798021332" target="_blank">App Store</a></div>
+<main class="full-gps-wrap">
+  <span class="eyebrow">Fonction GPS satellite</span>
+  <h2>Lecture du trou en vue satellite</h2>
+  <p class="lead">Une deuxième vue pour montrer l’utilisation du GPS dans QasGolfPro, toujours sans référence à un golf particulier.</p>
+  <div class="full-gps-card">
+    <div class="full-gps-shot"><img src="assets/satellite_page.png" alt="Vue GPS satellite QasGolfPro sans nom de parcours visible"></div>
+    <div class="gps-note"><span>Exemple d’utilisation sur le parcours</span><a class="btn secondary" href="index.html#fonctions">Retour aux fonctionnalités</a></div>
+  </div>
+</main>
+<script>
+const btn = document.querySelector('.menu-btn');
+const drawer = document.querySelector('.mobile-drawer');
+if(btn && drawer){
+  btn.addEventListener('click', ()=>{
+    const open = drawer.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true':'false');
+    btn.textContent = open ? '✕' : '☰';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
+    drawer.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    btn.textContent='☰';
+  }));
+}
+</script>
+</body></html>
