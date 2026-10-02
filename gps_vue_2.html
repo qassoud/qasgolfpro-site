@@ -234,10 +234,23 @@ footer{padding:34px 0 44px;color:#667;display:flex;justify-content:space-between
  .full-gps-shot{height:72svh}
  .full-gps-shot img{transform:translateY(-95px)}
 }
-</style></head><body>
+
+/* Language navigation stays visible on desktop and mobile. */
+.language-switch{display:flex;gap:3px;align-items:center;margin-left:auto;padding:3px;border:1px solid var(--line);border-radius:999px;background:white;flex-shrink:0}
+.language-switch a{min-width:38px;min-height:38px;display:flex;align-items:center;justify-content:center;border-radius:999px;font-size:.82rem;font-weight:850;color:#176a9d}
+.language-switch a[aria-current="page"]{background:#e9f6ff;color:#104d72}
+a:focus-visible,button:focus-visible{outline:3px solid #1687d9;outline-offset:4px}
+section[id]{scroll-margin-top:90px}
+@media(max-width:620px){.nav{gap:10px}.brand{font-size:1.2rem}.language-switch a{min-width:32px;min-height:36px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style><link rel="canonical" href="https://qasgolfpro.vercel.app/gps_vue_2.html">
+<link rel="alternate" hreflang="fr" href="https://qasgolfpro.vercel.app/gps_vue_2.html">
+<link rel="alternate" hreflang="en" href="https://qasgolfpro.vercel.app/gps_view_2_en.html">
+</head><body>
 <header class="site-header"><div class="wrap nav">
 <a class="brand" href="index.html">QasGolf<span>Pro</span></a>
 <nav class="desktop-nav"><a href="index.html#fonctions">Fonctions</a><a href="gps_vue_1.html">Autre vue GPS</a><a class="store-mini" href="https://apps.apple.com/app/id6798021332" target="_blank">App Store</a></nav>
+<nav class="language-switch" aria-label="Langue du site"><a href="gps_vue_2.html" lang="fr" hreflang="fr" aria-current="page" aria-label="Français">FR</a><a href="gps_view_2_en.html" lang="en" hreflang="en" aria-label="English">EN</a></nav>
 <button class="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
 </div></header>
 <div class="mobile-drawer"><a href="index.html#fonctions">Fonctions</a><a href="gps_vue_1.html">Autre vue GPS</a><a class="store-mini" href="https://apps.apple.com/app/id6798021332" target="_blank">App Store</a></div>
