@@ -96,13 +96,17 @@ h1{
   align-items:center;gap:10px;font-weight:850;min-height:54px;
 }
 .appstore .apple{font-size:1.7rem;line-height:1}
-.hero-visual{position:relative;min-height:610px}
+.hero-visual{
+  position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:center;gap:18px;width:100%;max-width:560px;min-width:0;
+  justify-self:center;padding:28px 16px;
+}
 .phone{
-  position:absolute;width:46%;border-radius:32px;box-shadow:0 30px 90px rgba(9,45,28,.25);
+  position:static;width:100%;height:auto;min-width:0;border-radius:32px;box-shadow:0 30px 90px rgba(9,45,28,.25);
   border:1px solid rgba(255,255,255,.8)
 }
-.phone.a{left:4%;bottom:-10px;transform:rotate(-4deg)}
-.phone.b{right:2%;top:0;transform:rotate(4deg)}
+.phone.a{margin-top:48px;transform:rotate(-4deg)}
+.phone.b{margin-bottom:48px;transform:rotate(4deg)}
 
 /* QUICK VALUE STRIP */
 .value-strip{background:white;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -209,7 +213,6 @@ footer{padding:34px 0 44px;color:#667;display:flex;justify-content:space-between
   .menu-btn{display:flex}
   .hero{min-height:auto}
   .hero-grid{grid-template-columns:1fr;padding:42px 0 28px}
-  .hero-visual{min-height:460px}
   .values{grid-template-columns:1fr 1fr}
   .value:nth-child(2){border-right:none}
   .value:nth-child(-n+2){border-bottom:1px solid var(--line)}
@@ -225,8 +228,7 @@ footer{padding:34px 0 44px;color:#667;display:flex;justify-content:space-between
   .mobile-drawer{inset:64px 0 auto 0}
   h1{font-size:clamp(3rem,16vw,5rem)}
   .hero-grid{gap:22px}
-  .hero-visual{min-height:390px}
-  .phone{width:48%;border-radius:22px}
+  .phone{border-radius:22px}
   .actions{gap:9px}
   .btn,.appstore{width:100%}
   .section{padding:54px 0}
